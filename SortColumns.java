@@ -1,4 +1,3 @@
-
 public class SortColumns {
     // prints whole orginal array
     public static void printArray(String[] A) {
@@ -7,9 +6,14 @@ public class SortColumns {
     }
 
     // prints whole indicies array
-    public static void printIndicies(int[] indicies) {
-        for (int i = 0; i < indicies.length; i++)
-            System.out.println("Indicies: " + indicies[i]);
+    public static void printOutput(int[] indicies) {
+        System.out.print("OUtput: {");
+        for (int i = 0; i < indicies.length; i++) {
+            System.out.print(indicies[i]);
+            if (i < indicies.length - 1)
+                System.out.print(", ");
+        }
+        System.out.print("}\n");
     }
 
     // checks if array has at least two strings to comapre
@@ -27,15 +31,15 @@ public class SortColumns {
         return true;
     }
 
-    // retruns the inices of colums uib arguemnt
+    // retruns the inices of colums arguemnt
     // NOTE: returns empty array if all is sorted
     public static int[] minDeletionSize(String[] A) {
         // compares columms
         int[] indicies = new int[A.length];
         int counter = 0;
-        for (int x = 1; x < A.length; x++)
-            for (int y = 0; y < A.length; y++)
-                if (A[x - 1].charAt(y) > A[x].charAt(y))
+        for (int x = 0; x < A.length - 1; x++)
+            for (int y = 0; y < A[0].length(); y++)
+                if (A[x].charAt(y) > A[x + 1].charAt(y))
                     indicies[y] = y + 1;
 
         // counts length of final array
@@ -55,17 +59,24 @@ public class SortColumns {
 
     public static void main(final String[] args) {
 
-        // TODO: fail check for mismatching string length
-        // TODO: output values: ex. "Output {-1}"
-
         String A[] = { "cba", "daf", "ghi" };
+        // String A[] = { "a", "b" };
         // String A[] = { "zyx", "wvu", "tsr" };
         // String A[] = { "cba", "daf", "ghi" };
         // String A[] = { "azb", "bac" };
         // String A[] = { "captain", "marvel", "saved", "the", "avengers" };
         printArray(A);
-        int indicies[] = minDeletionSize(A);
-        printIndicies(indicies);
-
+        if (checkArray(A) && checkLength(A)) {
+            int indicies[] = minDeletionSize(A);
+            printOutput(indicies);
+        } else {
+            if (!checkLength(A)) {
+                int indicies[] = { -1 };
+                printOutput(indicies);
+            } else {
+                int indicies[] = {};
+                printOutput(indicies);
+            }
+        }
     }
 }
