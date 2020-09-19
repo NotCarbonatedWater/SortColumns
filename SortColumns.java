@@ -1,13 +1,18 @@
 public class SortColumns {
     // prints whole orginal array
-    public static void printArray(String[] A) {
-        for (int i = 0; i < A.length; i++)
-            System.out.println("String[" + i + "]: " + A[i] + " - Length: " + A[i].length());
+    public static void printInput(String[] A) {
+        System.out.print("Input: {");
+        for (int i = 0; i < A.length; i++) {
+            System.out.print(A[i]);
+            if (i < A.length - 1)
+                System.out.print(", ");
+        }
+        System.out.print("}\n");
     }
 
     // prints whole indicies array
     public static void printOutput(int[] indicies) {
-        System.out.print("OUtput: {");
+        System.out.print("Output: {");
         for (int i = 0; i < indicies.length; i++) {
             System.out.print(indicies[i]);
             if (i < indicies.length - 1)
@@ -65,15 +70,15 @@ public class SortColumns {
         // String A[] = { "cba", "daf", "ghi" };
         // String A[] = { "azb", "bac" };
         // String A[] = { "captain", "marvel", "saved", "the", "avengers" };
-        printArray(A);
-        if (checkArray(A) && checkLength(A)) {
+        printInput(A);
+        if (checkArray(A) && checkLength(A)) { // checks num of strings and string length
             int indicies[] = minDeletionSize(A);
             printOutput(indicies);
         } else {
-            if (!checkLength(A)) {
+            if (!checkLength(A)) { // ERROR FOR unequal strings
                 int indicies[] = { -1 };
                 printOutput(indicies);
-            } else {
+            } else { // default
                 int indicies[] = {};
                 printOutput(indicies);
             }
